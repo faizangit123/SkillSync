@@ -27,8 +27,4 @@ urlpatterns = [
     path("change-password/", ChangePasswordView.as_view(), name="change-password"),
     path("stats/", UserStatsView.as_view(), name="user-stats"),
 
-    # -------------------------
-    # TEMP ADMIN (REMOVE AFTER USE)
-    # -------------------------
-    path("create-admin/", create_admin),
 ]

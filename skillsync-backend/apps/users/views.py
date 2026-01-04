@@ -2,8 +2,6 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, get_user_model
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
 
 
 from .serializers import (
@@ -104,21 +102,4 @@ class UserStatsView(generics.GenericAPIView):
         })
 
 
-# =========================================================
-# TEMPORARY: CREATE ADMIN USER (PRODUCTION ONLY)
-# =========================================================
 
-@api_view(["POST"])
-@permission_classes([AllowAny])
-def create_admin(request):
-    email = "admin@skillsync.dev"
-
-    if User.objects.filter(email=email).exists():
-        return Response({"detail": "Admin already exists"})
-
-    User.objects.create_superuser(
-        email=email,
-        password="Admin@123",
-        name="Admin"
-    )
-    return Response({"detail": "Admin created"})
