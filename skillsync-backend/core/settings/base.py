@@ -35,9 +35,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles", 
 
-    # ✅ REQUIRED FOR collectstatic
-    "django.contrib.staticfiles",
-
     # Third-party
     "corsheaders",
     "rest_framework",
