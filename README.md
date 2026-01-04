@@ -129,7 +129,10 @@ On every push and pull request, the pipeline:
 ### CI workflow file:
 ```
 .github/workflows/ci.yml
+
 ```
+### version
+- PostgreSQL 16.11 (Debian 16.11-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
 
 ### 👤 Author & Contact
 
