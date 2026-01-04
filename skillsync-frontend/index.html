@@ -1,27 +1,78 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- =====================
+         Basic Meta
+    ====================== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SkillSync - Track Skills, Build Projects, Grow Faster</title>
-    <meta name="description" content="SkillSync helps developers track their technical skills, manage projects, and visualize their growth journey." />
-    <meta name="author" content="SkillSync" />
 
-    <meta property="og:title" content="SkillSync - Developer Skill Tracking" />
-    <meta property="og:description" content="Track your technical skills, manage projects, and accelerate your growth." />
+    <title>SkillSync — Track Skills, Build Projects, Grow Faster</title>
+
+    <meta
+      name="description"
+      content="SkillSync is a full-stack platform for developers to track skills, manage projects, monitor milestones, and visualize growth."
+    />
+    <meta name="author" content="MD Faizan" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- =====================
+         Open Graph (SEO / Social)
+    ====================== -->
+    <meta property="og:site_name" content="SkillSync" />
+    <meta property="og:title" content="SkillSync — Developer Skill & Project Tracker" />
+    <meta
+      property="og:description"
+      content="Track your technical skills, manage projects, complete milestones, and accelerate your developer growth."
+    />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://skillsync.vercel.app" />
+    <!-- Optional: add when you have an image -->
+    <!-- <meta property="og:image" content="https://skillsync.vercel.app/og-image.png" /> -->
 
+    <!-- =====================
+         Twitter Cards
+    ====================== -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@SkillSync" />
+    <meta name="twitter:title" content="SkillSync — Developer Growth Platform" />
+    <meta
+      name="twitter:description"
+      content="A full-stack platform to track skills, manage projects, and visualize progress."
+    />
+    <!-- <meta name="twitter:image" content="https://skillsync.vercel.app/og-image.png" /> -->
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- =====================
+         Favicon (recommended)
+    ====================== -->
+    <!-- Add these when available -->
+    <!-- <link rel="icon" type="image/png" href="/favicon.png" /> -->
+    <!-- <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
+
+    <!-- =====================
+         Fonts (Performance Optimized)
+    ====================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- =====================
+         Theme Color (Mobile)
+    ====================== -->
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="shortcut icon" href="./public/favicon.jpg" type="image/x-icon">
   </head>
 
   <body>
+    <noscript>
+      SkillSync requires JavaScript to run properly.
+    </noscript>
+
     <div id="root"></div>
+
+    <!-- Vite Entry -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
