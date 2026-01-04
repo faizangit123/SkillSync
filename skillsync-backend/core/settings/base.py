@@ -73,7 +73,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
-    "https://your-frontend.onrender.com",
+    "https://skill-sync-sage-nu.vercel.app",
 ]
 
 # =========================
@@ -197,5 +197,8 @@ AUTHENTICATION_BACKENDS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "https://skill-sync-sage-nu.vercel.app",
     "https://*.onrender.com",
 ]
+
+
