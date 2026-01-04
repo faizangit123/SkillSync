@@ -1,14 +1,3 @@
-### ⚠️ Usage & Copyright Notice
-
-This project is a personal portfolio project created to demonstrate my
-full-stack development skills.
-
-You may view and evaluate the source code for learning and recruitment purposes only.
-
-- ❌ Commercial use is not permitted
-- ❌ Redistribution without permission is not permitted
-- ❌ Claiming this project as your own work is not permitted
-
 # SkillSync 🚀  
 **Full-Stack Skill & Project Tracking Platform**
 
@@ -20,15 +9,31 @@ You may view and evaluate the source code for learning and recruitment purposes 
 
 ---
 
+## ⚠️ Usage & Copyright Notice
+
+This project is a **personal portfolio project** created to demonstrate my **full-stack development skills**.
+
+You may **view and evaluate** the source code for **learning and recruitment purposes only**.
+
+### ❌ Restrictions
+- Commercial use is **not permitted**
+- Redistribution without permission is **not permitted**
+- Claiming this project as your own work is **not permitted**
+
+---
+
 ## 📌 Overview
 
 **SkillSync** is a **production-ready full-stack web application** designed to help developers track their **skills, projects, milestones, and progress analytics**.
 
-This project demonstrates **real-world software engineering practices**, including:
+The project demonstrates **real-world software engineering practices**, including:
+
 - API-first backend development
-- Clean frontend architecture
+- Clean, scalable frontend architecture
+- JWT-based authentication
 - Dockerized infrastructure
 - CI/CD automation using GitHub Actions
+- Cloud deployment (Render + Vercel)
 
 ---
 
@@ -37,23 +42,25 @@ This project demonstrates **real-world software engineering practices**, includi
 ### 🔐 Authentication
 - JWT-based login & registration
 - Secure protected routes
-- Token refresh handling
+- Access & refresh token handling
+- Auto-login after registration
 
 ### 🧠 Skills Management
 - Create, update, and delete skills
-- Skill categories (Frontend, Backend, DevOps, etc.)
-- Proficiency and experience tracking
+- Skill categorization (Frontend, Backend, DevOps, etc.)
+- Proficiency level & experience tracking
 
 ### 📁 Projects & Milestones
 - Project CRUD operations
-- Project status tracking (planned, in-progress, completed)
-- Milestone creation & completion toggle
-- Skill-to-project linking
+- Project status tracking (Planned, In Progress, Completed)
+- Milestone creation and completion toggle
+- Skill-to-project relationship mapping
 
 ### 📊 Dashboard & Analytics
 - Project progress overview
 - Milestone completion statistics
 - Skill usage insights
+- User-based data isolation
 
 ---
 
@@ -63,22 +70,43 @@ This project demonstrates **real-world software engineering practices**, includi
 - React + TypeScript
 - Vite
 - Tailwind CSS
-- React Query
+- Axios
+- Context API
+- Modular component architecture
 
 ### Backend
 - Django
 - Django REST Framework
-- JWT Authentication
+- JWT Authentication (SimpleJWT)
+- RESTful API design
+- Environment-based settings
 
 ### Database
-- PostgreSQL
+- PostgreSQL 16.11
 
-### DevOps
+### DevOps & Infrastructure
 - Docker & Docker Compose
 - GitHub Actions (CI)
-- Environment-based configuration
+- Render (Backend Hosting)
+- Vercel (Frontend Hosting)
 
 ---
+
+## 🏗️ Architecture Overview
+```
+Browser (Client)
+|
+v
+Frontend (React + Vite) ---> Backend (Django REST)
+| |
+v v
+Vercel Render
+|
+v
+PostgreSQL
+```
+---
+
 
 ## 📂 Project Structure
 ```
@@ -87,11 +115,21 @@ SKILLSYNC-V3/
 │ └── workflows/
 │ └── ci.yml
 ├── skillsync-backend/
+│ ├── apps/
+│ ├── core/
+│ ├── manage.py
+│ └── Dockerfile
 ├── skillsync-frontend/
+│ ├── src/
+│ ├── public/
+│ ├── vite.config.ts
+│ └── Dockerfile
+├── docker-compose.yml
 ├── .gitignore
 ├── LICENSE
 └── README.md
 ```
+
 
 ---
 
@@ -104,51 +142,109 @@ cd skillsync
 ```
 
 ### 2️⃣ Run with Docker
+```bash
+- Copy code
+```docker compose up --build
 ```
-docker compose up --build
-```
-
-### 3️⃣ Access the app
+### 3️⃣ Access the application
 
 - Frontend: http://localhost:8080
 
 - Backend API: http://localhost:8000
 
-### 🤖 CI/CD
+### 🌍 Production Deployment
+# Backend (Render)
+- Dockerized Django application
 
-This project uses GitHub Actions for Continuous Integration.
+- Gunicorn WSGI server
 
-On every push and pull request, the pipeline:
+- PostgreSQL database
 
-- Installs dependencies
+- Environment-based configuration
 
-- Builds frontend & backend
+# Frontend (Vercel)
+- Vite production build
 
-- Ensures project integrity
+- Environment variable–based API connection
 
-### CI workflow file:
+- Optimized static hosting
+
+---
+
+### 🔐 Environment Variables
+# Frontend (Vercel)
 ```
+env
+Copy code
+VITE_API_BASE_URL=https://skillsync-w0lo.onrender.com
+```
+# Backend (Render)
+```
+env
+Copy code
+DEBUG=False
+SECRET_KEY=your_secret_key
+DATABASE_URL=postgresql://...
+ALLOWED_HOSTS=skillsync-w0lo.onrender.com
+```
+### 🤖 CI/CD Pipeline
+- This project uses GitHub Actions for Continuous Integration.
+
+# On every push & pull request:
+- Install dependencies
+
+- uild frontend & backend
+
+- Validate project integrity
+
+---
+
+### 📄 CI Workflow:
+
+```bash
+Copy code
 .github/workflows/ci.yml
-
 ```
-### version
-- PostgreSQL 16.11 (Debian 16.11-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+---
+
+### 🔒 Security Considerations
+- JWT authentication with refresh tokens
+
+- Environment-based secrets
+
+- CORS protection
+
+- User-based data access control
+
+- Production-ready backend configuration
+
+---
+
+### 📡 API Design
+- RESTful endpoints
+
+- Token-based authentication
+
+- Clear separation of concerns
+
+- API-first approach (frontend easily replaceable)
 
 ### 👤 Author & Contact
-
 - MD FAIZAN
 - Full-Stack Developer
 
-- GitHub: https://github.com/faizangit123
+---
+#LINK - GitHub: https://github.com/faizangit123
 
-- Email: faizanrock705@gmail.com
+##LINK - Email: faizanrock705@gmail.com
+---
 
 ### ⭐ Support
-
 - If you find this project useful:
 
-### ⭐ Star the repository
+# ⭐ Star the repository
 
 - 🍴 Fork it
 
 - 📚 Use it as a learning reference
+

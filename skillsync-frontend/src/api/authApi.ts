@@ -45,7 +45,7 @@ async register(
     email: data.email,
     name: data.name,
     password: data.password,
-    password2: data.confirmPassword,
+    // password2: data.confirmPassword,
   };
 
   // 1️⃣ Register user
