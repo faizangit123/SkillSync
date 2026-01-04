@@ -134,7 +134,7 @@ const Contact = () => {
                   <CustomInput
                     label="Your Name"
                     name="name"
-                    placeholder="John Doe"
+                    placeholder="Enter Your Name"
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -143,7 +143,7 @@ const Contact = () => {
                     label="Your Email"
                     name="email"
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="Example@example.com"
                     value={formData.email}
                     onChange={handleChange}
                     required
