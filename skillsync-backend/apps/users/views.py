@@ -2,6 +2,8 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, get_user_model
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 
 
 from .serializers import (
@@ -105,10 +107,6 @@ class UserStatsView(generics.GenericAPIView):
 # =========================================================
 # TEMPORARY: CREATE ADMIN USER (PRODUCTION ONLY)
 # =========================================================
-
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
