@@ -2,19 +2,26 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
-# Load .env variables
+# =========================
+# Load environment variables
+# =========================
 load_dotenv()
 
+# =========================
 # Base directory
+# =========================
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# =========================
 # SECURITY
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-secret-key-for-dev")
+# =========================
+SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-secret-key-for-dev")
 
-# Base config (override in dev/prod)
-DEBUG = True
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
 # =========================
 # Applications
@@ -27,12 +34,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "corsheaders",
-
     # Third-party
+    "corsheaders",
     "rest_framework",
     "rest_framework.authtoken",
-    "rest_framework_simplejwt",   # ✅ REQUIRED
+    "rest_framework_simplejwt",
     "django_rest_passwordreset",
 
     # Local apps
@@ -44,27 +50,24 @@ INSTALLED_APPS = [
     "apps.settings_app",
 ]
 
-
 # =========================
 # Middleware
 # =========================
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
 
-    # ✅ CORS must be at the TOP (before CommonMiddleware)
+    # CORS must be high
     "corsheaders.middleware.CorsMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 # =========================
 # URLs / WSGI
@@ -92,18 +95,31 @@ TEMPLATES = [
 ]
 
 # =========================
-# Database (PostgreSQL)
+# Database (Docker + Render)
 # =========================
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if DATABASE_URL:
+    # Render / Production
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,
+        )
     }
-}
+else:
+    # Local Docker
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DB_NAME"),
+            "USER": os.getenv("DB_USER"),
+            "PASSWORD": os.getenv("DB_PASSWORD"),
+            "HOST": os.getenv("DB_HOST", "localhost"),
+            "PORT": os.getenv("DB_PORT", "5432"),
+        }
+    }
 
 # =========================
 # Password validation
@@ -124,13 +140,16 @@ USE_I18N = True
 USE_TZ = True
 
 # =========================
-# Static files
+# Static & Media
 # =========================
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 # =========================
-# Default primary key
+# Default PK
 # =========================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -157,23 +176,21 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
+# =========================
+# Auth
+# =========================
 AUTH_USER_MODEL = "users.User"
 
-# =========================
-# Authentication Backends
-# =========================
 AUTHENTICATION_BACKENDS = [
     "apps.users.auth_backend.EmailBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
 
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
-
+# =========================
+# CSRF
+# =========================
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://*.onrender.com",
 ]
-
-
