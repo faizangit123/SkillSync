@@ -8,7 +8,6 @@ from .views import (
     MeView,
     ChangePasswordView,
     UserStatsView,
-    create_admin,   # ✅ ADD THIS
 )
 
 urlpatterns = [
