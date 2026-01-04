@@ -27,11 +27,15 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 # Applications
 # =========================
 INSTALLED_APPS = [
+    # Django core
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.staticfiles", 
+
+    # ✅ REQUIRED FOR collectstatic
     "django.contrib.staticfiles",
 
     # Third-party
@@ -55,10 +59,7 @@ INSTALLED_APPS = [
 # =========================
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-
-    # CORS must be high
     "corsheaders.middleware.CorsMiddleware",
-
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -67,7 +68,16 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# =========================
+# CORS
+# =========================
 CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "https://your-frontend.onrender.com",
+]
 
 # =========================
 # URLs / WSGI
@@ -95,12 +105,11 @@ TEMPLATES = [
 ]
 
 # =========================
-# Database (Docker + Render)
+# Database (Render + Docker)
 # =========================
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
-    # Render / Production
     DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
@@ -109,7 +118,6 @@ if DATABASE_URL:
         )
     }
 else:
-    # Local Docker
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -140,7 +148,7 @@ USE_I18N = True
 USE_TZ = True
 
 # =========================
-# Static & Media
+# Static & Media (collectstatic READY)
 # =========================
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -190,7 +198,7 @@ AUTHENTICATION_BACKENDS = [
 # CSRF
 # =========================
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
     "https://*.onrender.com",
 ]
