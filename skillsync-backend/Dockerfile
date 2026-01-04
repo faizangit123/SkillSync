@@ -10,7 +10,9 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
-# ✅ Collect static at build time
+# Collect static at build time (OK)
 RUN python manage.py collectstatic --noinput
 
-CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]
+# ✅ Run migrations at START, then start gunicorn
+CMD python manage.py migrate && \
+    gunicorn core.wsgi:application --bind 0.0.0.0:8000
