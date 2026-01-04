@@ -45,12 +45,12 @@ class LoginView(generics.GenericAPIView):
         })
 
 
-
 class LogoutView(generics.GenericAPIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
         return Response({"detail": "Logged out successfully"})
+
 
 # -------------------------
 # USER (ME)
@@ -67,6 +67,7 @@ class MeView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         return self.request.user
+
 
 class ChangePasswordView(generics.GenericAPIView):
     serializer_class = ChangePasswordSerializer
@@ -98,3 +99,24 @@ class UserStatsView(generics.GenericAPIView):
             "projects": user.projects.count(),
             "notifications": user.notifications.count(),
         })
+
+
+# =========================================================
+# TEMPORARY: CREATE ADMIN USER (PRODUCTION ONLY)
+# =========================================================
+
+from rest_framework.decorators import api_view
+
+@api_view(["POST"])
+def create_admin(request):
+    email = "admin@skillsync.dev"
+
+    if User.objects.filter(email=email).exists():
+        return Response({"detail": "Admin already exists"})
+
+    User.objects.create_superuser(
+        email=email,
+        password="Admin@123",
+        name="Admin"
+    )
+    return Response({"detail": "Admin created"})
