@@ -9,19 +9,6 @@
 
 ---
 
-## ⚠️ Usage & Copyright Notice
-
-This project is a **personal portfolio project** created to demonstrate my **full-stack development skills**.
-
-You may **view and evaluate** the source code for **learning and recruitment purposes only**.
-
-### ❌ Restrictions
-- Commercial use is **not permitted**
-- Redistribution without permission is **not permitted**
-- Claiming this project as your own work is **not permitted**
-
----
-
 ## 📌 Overview
 
 **SkillSync** is a **production-ready full-stack web application** designed to help developers track their **skills, projects, milestones, and progress analytics**.
