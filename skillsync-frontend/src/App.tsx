@@ -27,6 +27,7 @@ import HowItWorks from "@/pages/HowItWorks";
 import Contact from "@/pages/Contact";
 import About from "@/pages/About";
 import NotFound from "@/pages/NotFound";
+import ScrollToTop from "@/layouts/ScrollToTop"
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <Toaster position="top-right" richColors />
       <BrowserRouter>
+      <ScrollToTop/>
         <AuthProvider>
           <Routes>
             {/* Public Routes */}
