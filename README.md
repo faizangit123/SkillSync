@@ -8,6 +8,16 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-316192?logo=postgresql)
 
 ---
+**SCRENSHOT**
+<img width="1920" height="1080" alt="skill" src="https://github.com/user-attachments/assets/8ca5976d-0860-47dd-9988-a20e8fd03c88" />
+---
+<img width="1920" height="1080" alt="Screenshot 2026-01-20 190623" src="https://github.com/user-attachments/assets/5d39e22b-ab60-45e7-bb47-fb2fb8dcaad7" />
+---
+<img width="1920" height="1080" alt="Screenshot 2026-01-20 190715" src="https://github.com/user-attachments/assets/acb243bd-8c42-4b43-968f-4f8f98c5bf56" />
+---
+<img width="1920" height="1080" alt="Screenshot 2026-01-20 190637" src="https://github.com/user-attachments/assets/1f75fa70-1469-4cd7-9044-97ca156bee61" />
+
+---
 
 ## 📌 Overview
 
@@ -48,6 +58,8 @@ The project demonstrates **real-world software engineering practices**, includin
 - Milestone completion statistics
 - Skill usage insights
 - User-based data isolation
+- **Google Analytics 4 (GA4) configured to track web traffic, user behavior, and page interactions for the production-deployed React application**
+
 
 ---
 
