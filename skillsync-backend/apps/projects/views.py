@@ -7,10 +7,7 @@ from .serializers import ProjectSerializer
 
 
 class ProjectListCreateView(generics.ListCreateAPIView):
-    """
-    GET  /api/projects/        -> List user's projects
-    POST /api/projects/        -> Create project with optional milestones
-    """
+   
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]
 
