@@ -1,4 +1,4 @@
-# SkillSync 🚀  
+# SkillSync 
 **Full-Stack Skill & Project Tracking Platform**
 
 ![CI](https://github.com/faizangit123/skillsync/actions/workflows/ci.yml/badge.svg)
@@ -253,12 +253,9 @@ Copy code
 ##LINK - Email: faizanrock705@gmail.com
 ---
 
-### ⭐ Support
-- If you find this project useful:
-
 # ⭐ Star the repository
 
 - 🍴 Fork it
 
-- 📚 Use it as a learning reference
+- Use it as a learning reference
 
