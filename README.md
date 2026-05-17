@@ -8,8 +8,18 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-316192?logo=postgresql)
 
 ---
+
+## 🌐 Live Demo
+
+| Service | URL |
+|---------|-----|
+| **Frontend** | https://skill-sync-sage-nu.vercel.app/ |
+
+---
+
 **SCREENSHOT**
 <img width="1920" height="1080" alt="skill" src="https://github.com/user-attachments/assets/8ca5976d-0860-47dd-9988-a20e8fd03c88" />
+
 ---
 
 <img width="1920" height="1080" alt="Screenshot 2026-01-20 190623" src="https://github.com/user-attachments/assets/5d39e22b-ab60-45e7-bb47-fb2fb8dcaad7" />
