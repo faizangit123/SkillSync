@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
 import { CustomInput } from '@/components/custom/CustomInput';
 import { CustomButton } from '@/components/custom/CustomButton';
 import { toast } from 'sonner';
+import { SEO } from '@/components/custom/SEO';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -35,6 +36,10 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Contact Us — SkillSync"
+        description="Get in touch with the creator of SkillSync for feedback, inquiries, or collaboration opportunities."
+      />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl text-center">

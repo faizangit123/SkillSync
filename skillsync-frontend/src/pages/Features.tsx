@@ -17,6 +17,8 @@ import {
   Bell,
 } from 'lucide-react';
 
+import { SEO } from '@/components/custom/SEO';
+
 const Features: React.FC = () => {
   const mainFeatures = [
     {
@@ -110,6 +112,10 @@ const Features: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+        <SEO 
+          title="SkillSync Features — Everything You Need to Grow"
+          description="Explore SkillSync's powerful features for tracking skills, managing projects, and visualizing your developer journey."
+        />
         {/* Hero Section */}
         <section className="py-24 px-4">
           <div className="container mx-auto text-center">

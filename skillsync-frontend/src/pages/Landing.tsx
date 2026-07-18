@@ -17,6 +17,8 @@ import {
 import { CustomButton } from '@/components/custom/CustomButton';
 import { CustomCard, CustomCardContent } from '@/components/custom/CustomCard';
 
+import { SEO } from '@/components/custom/SEO';
+
 const Landing: React.FC = () => {
   const features = [
     {
@@ -70,6 +72,7 @@ const Landing: React.FC = () => {
 
   return (
     <div className="overflow-hidden">
+      <SEO />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center">
         {/* Background Effects */}

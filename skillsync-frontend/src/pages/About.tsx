@@ -3,10 +3,16 @@ import { Link } from 'react-router-dom';
 import { Code2, Users, ArrowRight } from 'lucide-react';
 import { CustomButton } from '@/components/custom/CustomButton';
 import { CustomCard, CustomCardContent } from '@/components/custom/CustomCard';
+import { SEO } from '@/components/custom/SEO';
 
 const About: React.FC = () => {
   return (
     <div className="overflow-hidden">
+      <SEO 
+        title="About MD Faizan — SkillSync Creator"
+        description="Learn more about MD Faizan, a Full Stack Developer and the creator of SkillSync."
+        keywords="MD Faizan, Full Stack Developer, SkillSync creator, Django developer, React developer"
+      />
       {/* Hero Section */}
       <section className="py-32 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-card/30 via-transparent to-transparent" />

@@ -12,6 +12,7 @@ import {
   CustomCardContent,
   CustomCardFooter,
 } from '@/components/custom/CustomCard';
+import { SEO } from '@/components/custom/SEO';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -124,6 +125,10 @@ const Register: React.FC = () => {
 
   return (
     <div className="w-full max-w-md mx-auto px-4 py-12">
+      <SEO 
+        title="Create Account — SkillSync"
+        description="Join SkillSync today and start tracking your skills, managing your projects, and building your developer portfolio."
+      />
       <CustomCard className="animate-scale-in">
         <CustomCardHeader className="text-center">
           <CustomCardTitle className="text-2xl">Create Account</CustomCardTitle>

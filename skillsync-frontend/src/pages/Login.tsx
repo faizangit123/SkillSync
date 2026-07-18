@@ -5,6 +5,7 @@ import { useAuth } from '@/context/AuthContext';
 import { CustomButton } from '@/components/custom/CustomButton';
 import { CustomInput } from '@/components/custom/CustomInput';
 import { CustomCard, CustomCardHeader, CustomCardTitle, CustomCardDescription, CustomCardContent, CustomCardFooter } from '@/components/custom/CustomCard';
+import { SEO } from '@/components/custom/SEO';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -57,6 +58,10 @@ const Login: React.FC = () => {
 
   return (
     <div className="w-full max-w-md mx-auto px-4 py-12">
+      <SEO 
+        title="Sign In — SkillSync"
+        description="Sign in to your SkillSync account to track your skills and projects."
+      />
       <CustomCard className="animate-scale-in">
         <CustomCardHeader className="text-center">
           <CustomCardTitle className="text-2xl">Welcome Back</CustomCardTitle>

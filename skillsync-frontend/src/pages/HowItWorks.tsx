@@ -13,6 +13,8 @@ import {
   Play,
 } from 'lucide-react';
 
+import { SEO } from '@/components/custom/SEO';
+
 const HowItWorks: React.FC = () => {
   const steps = [
     {
@@ -76,6 +78,10 @@ const HowItWorks: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+        <SEO 
+          title="How SkillSync Works — 3 Simple Steps"
+          description="Learn how to start tracking your developer skills, manage projects, and visualize your progress with SkillSync in three simple steps."
+        />
         {/* Hero Section */}
         <section className="py-24 px-4">
           <div className="container mx-auto text-center">
