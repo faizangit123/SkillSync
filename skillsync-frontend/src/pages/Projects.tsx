@@ -36,11 +36,11 @@ const Projects: React.FC = () => {
         projectsApi.getAll(),
         skillsApi.getAll(),
       ]);
-      setProjects(projectsRes.data.length > 0 ? projectsRes.data : mockProjects);
-      setSkills(skillsRes.data.length > 0 ? skillsRes.data : mockSkills);
+      setProjects(projectsRes.data);
+      setSkills(skillsRes.data);
     } catch (error) {
-      setProjects(mockProjects);
-      setSkills(mockSkills);
+      setProjects([]);
+      setSkills([]);
     } finally {
       setIsLoading(false);
     }
@@ -103,10 +103,9 @@ const Projects: React.FC = () => {
     const colors: Record<string, string> = {
       'completed': 'bg-success/10 text-success border-success/20',
       'in_progress': 'bg-primary/10 text-primary border-primary/20',
-      'planning': 'bg-warning/10 text-warning border-warning/20',
-      'on-hold': 'bg-muted text-muted-foreground border-border',
+      'planned': 'bg-warning/10 text-warning border-warning/20',
     };
-    return colors[status] || colors['on-hold'];
+    return colors[status] || 'bg-muted text-muted-foreground border-border';
   };
 
   const getStatusLabel = (status: string) => {
@@ -144,10 +143,9 @@ const Projects: React.FC = () => {
 
   const statusOptions = [
     { value: 'all', label: 'All Status' },
-    { value: 'planning', label: 'Planning' },
+    { value: 'planned', label: 'Planning' },
     { value: 'in_progress', label: 'In Progress' },
     { value: 'completed', label: 'Completed' },
-    { value: 'on-hold', label: 'On Hold' },
   ];
 
   return (

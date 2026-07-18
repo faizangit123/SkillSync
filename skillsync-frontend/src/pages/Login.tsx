@@ -39,7 +39,19 @@ const Login: React.FC = () => {
       await login(formData);
       navigate(from, { replace: true });
     } catch (err: any) {
-      setError(err.message || 'Login failed. Please try again.');
+      const backendError = err.response?.data;
+      let errorMsg = 'Login failed. Please try again.';
+      
+      if (backendError) {
+        if (typeof backendError === 'string') errorMsg = backendError;
+        else if (backendError.non_field_errors) errorMsg = backendError.non_field_errors[0];
+        else if (backendError.detail) errorMsg = backendError.detail;
+        else if (Array.isArray(backendError)) errorMsg = backendError[0];
+      } else if (err.message) {
+        errorMsg = err.message;
+      }
+      
+      setError(errorMsg);
     }
   };
 
@@ -112,7 +124,7 @@ const Login: React.FC = () => {
           <div className="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
             <p className="text-sm text-muted-foreground text-center">
               <span className="font-medium text-primary">Demo:</span> Use{' '}
-              <span className="font-mono text-foreground">demo@skillsync.com</span> with any password
+              <span className="font-mono text-foreground">demo@skillsync.com</span> with password <span className="font-mono text-foreground">password123</span>
             </p>
           </div>
         </CustomCardContent>

@@ -6,7 +6,9 @@ class Skill(models.Model):
     CATEGORY_CHOICES = [
         ("frontend", "Frontend"),
         ("backend", "Backend"),
+        ("database", "Database"),
         ("devops", "DevOps"),
+        ("mobile", "Mobile"),
         ("design", "Design"),
         ("other", "Other"),
     ]
@@ -15,6 +17,7 @@ class Skill(models.Model):
         ("beginner", "Beginner"),
         ("intermediate", "Intermediate"),
         ("advanced", "Advanced"),
+        ("expert", "Expert"),
     ]
 
     user = models.ForeignKey(

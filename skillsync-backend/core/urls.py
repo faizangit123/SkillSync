@@ -33,4 +33,5 @@ urlpatterns = [
     path("api/projects/", include("apps.projects.urls")),
     path("api/notifications/", include("apps.notifications.urls")),
     path("api/dashboard/", include("apps.dashboard.urls")),
+    path("api/settings/", include("apps.settings_app.urls")),
 ]

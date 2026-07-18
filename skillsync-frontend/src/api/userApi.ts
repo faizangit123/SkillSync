@@ -59,7 +59,7 @@ export const userApi = {
     data: ChangePasswordData
   ): Promise<ApiResponse<null>> {
     await http.post(`/api/users/${userId}/change-password/`, {
-      current_password: data.currentPassword,
+      old_password: data.currentPassword,
       new_password: data.newPassword,
     });
 

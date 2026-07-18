@@ -54,10 +54,7 @@ class ToggleMilestoneView(generics.GenericAPIView):
         milestone.is_completed = not milestone.is_completed
         milestone.save()
 
-        return Response(
-            {
-                "status": "updated",
-                "is_completed": milestone.is_completed,
-            },
-            status=status.HTTP_200_OK,
-        )
+        # Return the full project so the frontend can update state
+        project = milestone.project
+        serializer = ProjectSerializer(project, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)

@@ -14,5 +14,5 @@ urlpatterns = [
     path("<int:pk>/read/", MarkAsReadView.as_view()),
     path("mark-all-read/", MarkAllReadView.as_view()),
     path("<int:pk>/", NotificationDeleteView.as_view()),
-    path("", ClearAllNotificationsView.as_view()),
+    path("clear/", ClearAllNotificationsView.as_view()),
 ]

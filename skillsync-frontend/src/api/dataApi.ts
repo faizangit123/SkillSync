@@ -33,7 +33,7 @@ export const skillsApi = {
   /**
    * GET /api/skills/:id/
    */
-  async getById(id: number): Promise<ApiResponse<Skill>> {
+  async getById(id: string | number): Promise<ApiResponse<Skill>> {
     const res = await http.get(`/api/skills/${id}/`);
     return { data: res.data, success: true };
   },
@@ -60,7 +60,7 @@ export const skillsApi = {
    * PUT /api/skills/:id/
    */
   async update(
-    id: number,
+    id: string | number,
     data: UpdateSkillData
   ): Promise<ApiResponse<Skill>> {
     const res = await http.put(`/api/skills/${id}/`, {
@@ -84,7 +84,7 @@ export const skillsApi = {
   /**
    * DELETE /api/skills/:id/
    */
-  async delete(id: number): Promise<ApiResponse<null>> {
+  async delete(id: string | number): Promise<ApiResponse<null>> {
     await http.delete(`/api/skills/${id}/`);
     return {
       data: null,
@@ -99,9 +99,11 @@ export const skillsApi = {
 ======================= */
 
 export interface CreateProjectData {
-  title: string;          // ✅ matches Django
+  title: string;
   description: string;
   status: ProjectStatus;
+  skills?: string[];
+  milestones?: { title: string; completed: boolean; dueDate?: string }[];
 }
 export interface UpdateProjectData
   extends Partial<CreateProjectData> {}
@@ -118,7 +120,7 @@ export const projectsApi = {
   /**
    * GET /api/projects/:id/
    */
-  async getById(id: number): Promise<ApiResponse<Project>> {
+  async getById(id: string | number): Promise<ApiResponse<Project>> {
     const res = await http.get(`/api/projects/${id}/`);
     return { data: res.data, success: true };
   },
@@ -131,6 +133,8 @@ export const projectsApi = {
     title: data.title,
     description: data.description,
     status: data.status,
+    ...(data.skills !== undefined && { skills: data.skills }),
+    ...(data.milestones !== undefined && { milestones: data.milestones }),
   });
 
   return {
@@ -143,15 +147,17 @@ export const projectsApi = {
    * PUT /api/projects/:id/
    */
   async update(
-    id: number,
+    id: string | number,
     data: UpdateProjectData
   ): Promise<ApiResponse<Project>> {
     const res = await http.put(`/api/projects/${id}/`, {
-...(data.title !== undefined && { title: data.title }),
+      ...(data.title !== undefined && { title: data.title }),
       ...(data.description !== undefined && {
         description: data.description,
       }),
       ...(data.status !== undefined && { status: data.status }),
+      ...(data.skills !== undefined && { skills: data.skills }),
+      ...(data.milestones !== undefined && { milestones: data.milestones }),
     });
 
     return {
@@ -164,7 +170,7 @@ export const projectsApi = {
   /**
    * DELETE /api/projects/:id/
    */
-  async delete(id: number): Promise<ApiResponse<null>> {
+  async delete(id: string | number): Promise<ApiResponse<null>> {
     await http.delete(`/api/projects/${id}/`);
     return {
       data: null,
@@ -177,9 +183,9 @@ export const projectsApi = {
    * PATCH /api/projects/:projectId/milestones/:milestoneId/
    */
   async toggleMilestone(
-    projectId: number,
-    milestoneId: number
-  ): Promise<ApiResponse<{ status: string }>> {
+    projectId: string | number,
+    milestoneId: string | number
+  ): Promise<ApiResponse<Project>> {
     const res = await http.patch(
       `/api/projects/${projectId}/milestones/${milestoneId}/`
     );

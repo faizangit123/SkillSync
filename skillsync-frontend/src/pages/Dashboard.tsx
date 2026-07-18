@@ -77,13 +77,11 @@ const Dashboard: React.FC = () => {
         projectsApi.getAll(),
       ]);
       
-      // Use localStorage data if available, otherwise fall back to mock data
-      setSkills(skillsRes.data.length > 0 ? skillsRes.data : mockSkills);
-      setProjects(projectsRes.data.length > 0 ? projectsRes.data : mockProjects);
+      setSkills(skillsRes.data);
+      setProjects(projectsRes.data);
     } catch (error) {
-      // Fallback to mock data on error
-      setSkills(mockSkills);
-      setProjects(mockProjects);
+      setSkills([]);
+      setProjects([]);
     } finally {
       setIsLoading(false);
     }
@@ -119,14 +117,13 @@ const Dashboard: React.FC = () => {
     if (!searchQuery.trim()) return projects;
     const query = searchQuery.toLowerCase();
     return projects.filter(project => 
-      project.name.toLowerCase().includes(query) ||
-      project.description.toLowerCase().includes(query) ||
-      project.status.toLowerCase().includes(query) ||
-      project.skills.some(skill => skill.toLowerCase().includes(query))
+      (project.title || '').toLowerCase().includes(query) ||
+      (project.description || '').toLowerCase().includes(query) ||
+      (project.status || '').toLowerCase().includes(query)
     );
   }, [projects, searchQuery]);
 
-  const activeProjects = projects.filter(p => p.status === 'in-progress');
+  const activeProjects = projects.filter(p => p.status === 'in_progress');
   const completedProjects = projects.filter(p => p.status === 'completed');
   const recentProjects = [...filteredProjects]
     .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
@@ -159,9 +156,8 @@ const Dashboard: React.FC = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed': return 'bg-success/10 text-success border-success/20';
-      case 'in-progress': return 'bg-primary/10 text-primary border-primary/20';
-      case 'planning': return 'bg-warning/10 text-warning border-warning/20';
-      case 'on-hold': return 'bg-muted text-muted-foreground border-border';
+      case 'in_progress': return 'bg-primary/10 text-primary border-primary/20';
+      case 'planned': return 'bg-warning/10 text-warning border-warning/20';
       default: return 'bg-muted text-muted-foreground border-border';
     }
   };
@@ -280,14 +276,14 @@ const Dashboard: React.FC = () => {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-foreground truncate">{project.name}</h3>
+                      <h3 className="font-medium text-foreground truncate">{project.title}</h3>
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{project.description}</p>
                       <div className="flex items-center gap-2 mt-3">
                         <span className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(project.status)}`}>
                           {getStatusLabel(project.status)}
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          {project.skills.length} skills
+                          {(project.skills || []).length} skills
                         </span>
                       </div>
                     </div>

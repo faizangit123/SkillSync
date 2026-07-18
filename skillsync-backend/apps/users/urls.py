@@ -8,6 +8,8 @@ from .views import (
     MeView,
     ChangePasswordView,
     UserStatsView,
+    UserDetailView,
+    AvatarUploadView,
 )
 
 urlpatterns = [
@@ -24,6 +26,14 @@ urlpatterns = [
     # -------------------------
     path("me/", MeView.as_view(), name="me"),
     path("change-password/", ChangePasswordView.as_view(), name="change-password"),
-    path("stats/", UserStatsView.as_view(), name="user-stats"),
+    path("stats/", UserStatsView.as_view(), name="user-stats-me"),
+
+    # -------------------------
+    # USER BY ID
+    # -------------------------
+    path("<int:pk>/", UserDetailView.as_view(), name="user-detail"),
+    path("<int:pk>/change-password/", ChangePasswordView.as_view(), name="change-password-id"),
+    path("<int:pk>/avatar/", AvatarUploadView.as_view(), name="avatar-upload"),
+    path("<int:pk>/stats/", UserStatsView.as_view(), name="user-stats-id"),
 
 ]

@@ -93,13 +93,54 @@ class ChangePasswordView(generics.GenericAPIView):
 class UserStatsView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request):
+    def get(self, request, pk=None):
         user = request.user
+        if pk and str(pk) != str(user.id):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+            
         return Response({
-            "skills": user.skills.count(),
-            "projects": user.projects.count(),
-            "notifications": user.notifications.count(),
+            "totalSkills": user.skills.count(),
+            "totalProjects": user.projects.count(),
+            "completedProjects": user.projects.filter(status="completed").count(),
+            "activeProjects": user.projects.exclude(status="completed").count(),
+            "memberSince": user.date_joined.strftime("%Y-%m-%dT%H:%M:%SZ") if user.date_joined else None,
         })
 
 
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET    /api/users/:id/
+    PUT    /api/users/:id/
+    DELETE /api/users/:id/
+    """
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
 
+    def get_object(self):
+        obj = super().get_object()
+        if obj != self.request.user:
+            self.permission_denied(self.request, message="Not allowed to access other users.")
+        return obj
+
+class AvatarUploadView(generics.GenericAPIView):
+    """
+    POST /api/users/:id/avatar/
+    """
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        if str(pk) != str(request.user.id):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        avatar = request.FILES.get('avatar')
+        if not avatar:
+            return Response({"detail": "No avatar file provided"}, status=status.HTTP_400_BAD_REQUEST)
+
+        request.user.avatar = avatar
+        request.user.save()
+
+        # Build full URL if request is available, else relative
+        avatar_url = request.build_absolute_uri(request.user.avatar.url) if request.user.avatar else None
+
+        return Response({"avatar": avatar_url}, status=status.HTTP_200_OK)

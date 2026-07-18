@@ -32,10 +32,9 @@ const Skills: React.FC = () => {
     setIsLoading(true);
     try {
       const response = await skillsApi.getAll();
-      // If no skills in localStorage, use mock data
-      setSkills(response.data.length > 0 ? response.data : mockSkills);
+      setSkills(response.data);
     } catch (error) {
-      setSkills(mockSkills);
+      setSkills([]);
     } finally {
       setIsLoading(false);
     }

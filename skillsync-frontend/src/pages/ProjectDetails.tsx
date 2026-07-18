@@ -37,14 +37,13 @@ const ProjectDetails: React.FC = () => {
         skillsApi.getAll(),
       ]);
       
-      const allProjects = projectsRes.data.length > 0 ? projectsRes.data : mockProjects;
-      const foundProject = allProjects.find(p => p.id === id);
+      const allProjects = projectsRes.data;
+      const foundProject = allProjects.find((p: Project) => String(p.id) === String(id));
       setProject(foundProject || null);
-      setSkills(skillsRes.data.length > 0 ? skillsRes.data : mockSkills);
+      setSkills(skillsRes.data);
     } catch (error) {
-      const foundProject = mockProjects.find(p => p.id === id);
-      setProject(foundProject || null);
-      setSkills(mockSkills);
+      setProject(null);
+      setSkills([]);
     } finally {
       setIsLoading(false);
     }
@@ -128,14 +127,13 @@ const ProjectDetails: React.FC = () => {
     const colors: Record<string, string> = {
       'completed': 'bg-success/10 text-success border-success/20',
       'in_progress': 'bg-primary/10 text-primary border-primary/20',
-      'planning': 'bg-warning/10 text-warning border-warning/20',
-      'on-hold': 'bg-muted text-muted-foreground border-border',
+      'planned': 'bg-warning/10 text-warning border-warning/20',
     };
-    return colors[status] || colors['on-hold'];
+    return colors[status] || 'bg-muted text-muted-foreground border-border';
   };
 
   const getStatusLabel = (status: string) => {
-    return status.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    return status.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
 
   const getSkillById = (skillId: string) => {

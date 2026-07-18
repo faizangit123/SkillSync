@@ -25,10 +25,9 @@ interface MilestoneInput {
 }
 
 const statusOptions = [
-  { value: 'planning', label: 'Planning' },
-  { value: 'in-progress', label: 'In Progress' },
+  { value: 'planned', label: 'Planning' },
+  { value: 'in_progress', label: 'In Progress' },
   { value: 'completed', label: 'Completed' },
-  // { value: 'on-hold', label: 'On Hold' },
 ];
 
 export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
@@ -42,7 +41,7 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    status: 'plann' as ProjectStatus,
+    status: 'planned' as ProjectStatus,
     skills: [] as string[],
     startDate: '',
     endDate: '',
@@ -106,9 +105,11 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
     title: formData.name,           // ✅ backend expects "title"
     description: formData.description,
     status: formData.status,
+    skills: formData.skills,
     milestones: milestones.map(m => ({
       title: m.title,
-      is_completed: m.completed,
+      completed: m.completed,
+      dueDate: m.dueDate,
     })),
   });
 };

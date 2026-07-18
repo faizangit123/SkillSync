@@ -1,4 +1,4 @@
-# SkillSync 
+# SkillSync
 **Full-Stack Skill & Project Tracking Platform**
 
 ![CI](https://github.com/faizangit123/skillsync/actions/workflows/ci.yml/badge.svg)
